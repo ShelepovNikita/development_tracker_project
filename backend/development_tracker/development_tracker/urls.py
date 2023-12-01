@@ -2,7 +2,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -17,6 +17,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path("api/", include("api.urls")),
     path("admin/", admin.site.urls),
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",

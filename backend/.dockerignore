@@ -3,3 +3,4 @@ venv
 .git
 .env
 db.sqlite3
+.idea
