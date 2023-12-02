@@ -14,6 +14,8 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="kek")
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# AUTH_USER_MODEL = "users.CustomUser"
+CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -27,10 +29,13 @@ INSTALLED_APPS = [
     "courses.apps.CoursesConfig",
     "skills.apps.SkillsConfig",
     "users.apps.UsersConfig",
-    "selections.apps.SelectionsConfig"
+    "selections.apps.SelectionsConfig",
+    "corsheaders",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -57,6 +62,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
 
 WSGI_APPLICATION = "development_tracker.wsgi.application"
 
