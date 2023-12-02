@@ -24,6 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "drf_yasg",
     "rest_framework",
+    "courses.apps.CoursesConfig",
+    "skills.apps.SkillsConfig",
+    "users.apps.UsersConfig",
+    "selections.apps.SelectionsConfig"
 ]
 
 MIDDLEWARE = [
