@@ -1,11 +1,19 @@
 from django.urls import include, path
-from api.v1.views import RecommendedCoursesTracker
+from api.v1.views import (
+    RecommendedCoursesTracker,
+    RecommendedCoursesCollection,
+)
 
 urlpatterns = [
     path(
         "recommended-courses-tracker/",
         RecommendedCoursesTracker.as_view(),
-        name="courses_list",
+        name="recommended_courses_tracker",
+    ),
+    path(
+        "recommended-courses-collection/<int:pk>/",
+        RecommendedCoursesCollection.as_view(),
+        name="recommended_courses_collection",
     ),
 ]
 

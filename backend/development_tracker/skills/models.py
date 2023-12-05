@@ -1,15 +1,15 @@
 from django.db import models
-from users.models import User
+
+# from users.models import CustomUser
 
 
-class DefaultSkill(models.Model):
+class Skill(models.Model):
     name = models.CharField(max_length=100)
     editable = models.BooleanField(default=False)
 
 
-class EditableSkill(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    rate = models.IntegerField()
-    notes = models.CharField(max_length=100)
-    editable = models.BooleanField(default=True)
+# class UserSkill(models.Model):
+#     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+#     rate = models.IntegerField()
+#     notes = models.CharField(max_length=100)
+#     editable = models.BooleanField(default=True)

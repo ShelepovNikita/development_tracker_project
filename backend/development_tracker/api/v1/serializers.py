@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
 from courses.models import Course
-from skills.models import DefaultSkill
-from users.models import User
+from skills.models import Skill
+
+# from users.models import User
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -13,17 +14,17 @@ class CourseSerializer(serializers.ModelSerializer):
 
 class DefaultSkillSerializer(serializers.ModelSerializer):
     class Meta:
-        model = DefaultSkill
+        model = Skill
         fields = ("name",)
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = [
-            "username",
-            "first_name",
-            "last_name",
-            "email",
-            "date_joined",
-        ]
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = [
+#             "username",
+#             "first_name",
+#             "last_name",
+#             "email",
+#             "date_joined",
+#         ]
