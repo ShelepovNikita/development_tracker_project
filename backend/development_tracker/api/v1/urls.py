@@ -6,7 +6,7 @@ from api.v1.views import (
     SkillViewSet,
     UserDataView,
     # UserViewSet,
-    # SelectionViewSet,
+    # APISelections,
 )
 
 router_v1 = DefaultRouter()
@@ -17,5 +17,5 @@ urlpatterns = [
     path("", include(router_v1.urls)),
     path("courses/", APICourses.as_view(), name="courses_list"),
     path("userData/", UserDataView.as_view(), name="user"),
-    # path("collections/", SelectionViewSet.as_view(), name="selections_list"),
+    # path("collections/", APISelections.as_view(), name="selections_list"),
 ]

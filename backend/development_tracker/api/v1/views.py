@@ -12,7 +12,7 @@ class APICourses(APIView):
     def get(self, request):
         courses = Course.objects.all()
         serializer = CourseSerializer(courses, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class SkillViewSet(viewsets.ModelViewSet):
@@ -20,7 +20,7 @@ class SkillViewSet(viewsets.ModelViewSet):
     serializer_class = DefaultSkillSerializer
 
 
-class SelectionViewSet(APIView):
+class APISelections(APIView):
     def get(self, request, *args, **kwargs):
         pass
 

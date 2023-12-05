@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="baaa8b41-40cc-4e22-8bdf-45c8cf0f4705" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/development_tracker/core/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/courses/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/courses/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/courses/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/courses/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/selections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/selections/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/skills/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/skills/models.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2YtIfLZbKMEZVViRGD1Z5C7daK4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lab. 25/Desktop/development-tracker-frontend&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lab. 25\Desktop\development_tracker_project\backend\development_tracker" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="baaa8b41-40cc-4e22-8bdf-45c8cf0f4705" name="Changes" comment="" />
+      <created>1701338550872</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701338550872</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
