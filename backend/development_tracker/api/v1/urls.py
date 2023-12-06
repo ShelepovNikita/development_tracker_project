@@ -1,37 +1,39 @@
 from django.urls import include, path
+from rest_framework.routers import SimpleRouter
+
 from api.v1.views import (
-    RecommendedCoursesTracker,
-    RecommendedCoursesCollection,
+    CollectionsViewSet,
+    RecommendedCoursesTrackerView,
+    RecommendedCoursesCollectionView,
+    SkillsView,
+    UpdateDeleteSkillsView,
+    UserDataViewSet,
 )
 
+
+router_v1 = SimpleRouter()
+router_v1.register("userData", UserDataViewSet, basename="user_data")
+router_v1.register("collections", CollectionsViewSet, basename="user_data")
 urlpatterns = [
+    path("", include(router_v1.urls)),
     path(
         "recommended-courses-tracker/",
-        RecommendedCoursesTracker.as_view(),
+        RecommendedCoursesTrackerView.as_view(),
         name="recommended_courses_tracker",
     ),
     path(
         "recommended-courses-collection/<int:pk>/",
-        RecommendedCoursesCollection.as_view(),
+        RecommendedCoursesCollectionView.as_view(),
         name="recommended_courses_collection",
     ),
+    path(
+        "skills/",
+        SkillsView.as_view(),
+        name="skills",
+    ),
+    path(
+        "skills/<int:pk>/",
+        UpdateDeleteSkillsView.as_view(),
+        name="skills",
+    ),
 ]
-
-
-# from rest_framework.routers import DefaultRouter
-# from api.v1.views import (
-#     APICourses,
-#     SkillViewSet,
-#     UserDataView,
-#     # UserViewSet,
-#     # SelectionViewSet,
-# )
-# router_v1 = DefaultRouter()
-# router_v1.register(r"skills", SkillViewSet, basename="skills")
-# # router.register(r"users", UserViewSet, basename="users")
-# urlpatterns = [
-#     path("", include(router_v1.urls)),
-#     path("recommended-courses-tracker/", APICourses.as_view(), name="courses_list"),
-#     path("userData/", UserDataView.as_view(), name="user"),
-#     path("collections/", SelectionViewSet.as_view(), name="selections_list"),
-# ]

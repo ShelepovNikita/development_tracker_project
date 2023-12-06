@@ -62,7 +62,11 @@ class Command(BaseCommand):
             reader = csv.DictReader(r_file)
             csv_data = []
             for row in reader:
-                selection = Selection(id=row.get("id"), name=row.get("name"))
+                selection = Selection(
+                    id=row.get("id"),
+                    name=row.get("name"),
+                    description=row.get("name"),
+                )
                 csv_data.append(selection)
             try:
                 Selection.objects.bulk_create(csv_data)

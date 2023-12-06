@@ -1,8 +1,6 @@
 from django.db import models
 from skills.models import Skill
 
-# from users.models import CustomUser
-
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
@@ -13,18 +11,8 @@ class Course(models.Model):
         through="CourseDefaultSkill",
         through_fields=("course", "skill"),
     )
-    # user = models.ManyToManyField(
-    #     User,
-    #     through="CourseUser",
-    #     through_fields=("course", "user"),
-    # )
 
 
 class CourseDefaultSkill(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
-
-
-# class CourseUser(models.Model):
-#     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
