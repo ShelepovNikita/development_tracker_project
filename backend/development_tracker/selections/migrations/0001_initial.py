@@ -14,25 +14,23 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name='Selection',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('image', models.CharField(max_length=255)),
-                ('url', models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='CourseDefaultSkill',
+            name='SelectionSkill',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.course')),
+                ('selection', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='selections.selection')),
                 ('skill', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='skills.skill')),
             ],
         ),
         migrations.AddField(
-            model_name='course',
+            model_name='selection',
             name='skill',
-            field=models.ManyToManyField(through='courses.CourseDefaultSkill', to='skills.skill'),
+            field=models.ManyToManyField(through='selections.SelectionSkill', to='skills.skill'),
         ),
     ]

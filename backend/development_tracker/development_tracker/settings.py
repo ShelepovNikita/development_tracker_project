@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="kek")
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "users.CustomUser"
 CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "drf_yasg",
     "rest_framework",
+    "api.apps.ApiConfig",
     "courses.apps.CoursesConfig",
     "skills.apps.SkillsConfig",
     "users.apps.UsersConfig",
