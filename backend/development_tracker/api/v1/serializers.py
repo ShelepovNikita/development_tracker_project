@@ -19,11 +19,11 @@ class Base64ImageField(serializers.ImageField):
     """
 
     def to_internal_value(self, data):
-        if isinstance(data, str) and data.startswith('data:image'):
-            format, imgstr = data.split(';base64,')
-            ext = format.split('/')[-1]
+        if isinstance(data, str) and data.startswith("data:image"):
+            format, imgstr = data.split(";base64,")
+            ext = format.split("/")[-1]
 
-            data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+            data = ContentFile(base64.b64decode(imgstr), name="temp." + ext)
 
         return super().to_internal_value(data)
 
@@ -49,8 +49,8 @@ class UserSkillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSkill
-        fields = ("skill", "rate", "notes", "editable")
-        read_only_fields = ("skill", "rate", "notes")
+        fields = ("id", "skill", "rate", "notes", "editable")
+        read_only_fields = ("id", "skill", "rate", "notes")
 
 
 class PatchUserSkillSerializer(serializers.ModelSerializer):
@@ -58,8 +58,8 @@ class PatchUserSkillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSkill
-        fields = ("name", "rate", "notes", "editable")
-        read_only_fields = ("editable",)
+        fields = ("id", "name", "rate", "notes", "editable")
+        read_only_fields = ("id", "editable")
 
 
 class UserDataSkillSerializer(serializers.ModelSerializer):
