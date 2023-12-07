@@ -161,14 +161,21 @@ class UpdateDeleteSkillsView(APIView):
         )
         if serializer.is_valid():
             serializer.save()
-        return Response(serializer.data)
+        user_skill = {
+            "id": user_skill.id,
+            "name": get_object_or_404(Skill, id=user_skill.skill_id).name,
+            "rate": user_skill.rate,
+            "notes": user_skill.notes,
+            "editable": user_skill.editable,
+        }
+        return Response(user_skill)
 
     def delete(self, request, pk):
         user_skill = get_object_or_404(UserSkill, id=pk)
         user_skill.delete()
         data = {
             "id": pk,
-            "name": Skill.objects.get(id=user_skill.skill_id).name,
+            "name": get_object_or_404(Skill, id=user_skill.skill_id).name,
             "rate": user_skill.rate,
             "notes": user_skill.notes,
             "editable": user_skill.editable,

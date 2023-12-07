@@ -45,12 +45,12 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class UserSkillSerializer(serializers.ModelSerializer):
-    skill = serializers.StringRelatedField(read_only=True)
+    name = serializers.StringRelatedField(read_only=True, source="skill")
 
     class Meta:
         model = UserSkill
-        fields = ("id", "skill", "rate", "notes", "editable")
-        read_only_fields = ("id", "skill", "rate", "notes")
+        fields = ("id", "name", "rate", "notes", "editable")
+        read_only_fields = ("id", "name", "rate", "notes")
 
 
 class PatchUserSkillSerializer(serializers.ModelSerializer):
