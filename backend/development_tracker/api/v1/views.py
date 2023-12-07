@@ -167,6 +167,7 @@ class UpdateDeleteSkillsView(APIView):
         user_skill = get_object_or_404(UserSkill, id=pk)
         user_skill.delete()
         data = {
+            "id": pk,
             "name": Skill.objects.get(id=user_skill.skill_id).name,
             "rate": user_skill.rate,
             "notes": user_skill.notes,
