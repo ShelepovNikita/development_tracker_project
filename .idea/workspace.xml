@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3ebc40a1-4dc1-4d46-92e7-dbec202b683d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/development_tracker/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/development_tracker/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/selections/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/selections/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/selections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/selections/models.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2ZAi7Ks4ooIDXGTJNBPC64ZVikR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lab. 25/Desktop/cipy_project/development_tracker_project&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3ebc40a1-4dc1-4d46-92e7-dbec202b683d" name="Changes" comment="" />
+      <created>1701871115830</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701871115830</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

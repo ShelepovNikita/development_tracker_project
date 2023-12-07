@@ -1,3 +1,5 @@
+from django.db import IntegrityError
+from django.db.models import Prefetch, Count, Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -23,19 +25,18 @@ class RecommendedCoursesTrackerView(APIView):
         """Возвращает рекомендованные курсы на основе хотя бы одного
         совпадения навыка пользователя с курсом, который он еще не проходил
         для страницы Трекер."""
-
-        user = get_object_or_404(CustomUser, id=self.request.user.id)
+        user = get_object_or_404(CustomUser.objects.prefetch_related('courses'), id=request.user.id)
         user_courses = user.courses.all()
-        user_skills = user.user_skills.filter(editable=False)
-        courses = Course.objects.all()
-        obj = []
-        for course in courses:
-            for skill in user_skills:
-                if skill in course.skills.all():
-                    if course not in user_courses:
-                        obj.append(course)
-                        break
-        serializer = CourseSerializer(obj, many=True)
+        user_skills = user.user_skills.filter(editable=False).values_list('id', flat=True)
+
+        courses_with_skills = Course.objects.prefetch_related(
+            Prefetch('skills', queryset=Skill.objects.filter(id__in=user_skills))
+        )
+        courses = courses_with_skills.annotate(
+            matching_skills_count=Count('skills', filter=Q(skills__in=user_skills))
+        ).filter(matching_skills_count__gt=0).exclude(id__in=user_courses.values_list('id', flat=True))
+
+        serializer = CourseSerializer(courses, many=True)
         return Response(serializer.data)
 
 
@@ -44,57 +45,32 @@ class RecommendedCoursesCollectionView(APIView):
         """Возвращает рекомендованные курсы по максимальному количеству
         совпадений навыков пользователя и навыков подборки."""
 
-        # Это очень плохой алгоритм((
-        user = get_object_or_404(CustomUser, id=self.request.user.id)
-        user_courses = user.courses.all()
-        selection = get_object_or_404(Selection, pk=self.kwargs.get("pk"))
-        selection_skills = selection.skills.all()
-        user_skills = user.user_skills.filter(editable=False)
-        user_skills_in_selection = []
-        skills_counters = []
-        courses_for_recommend = []
-        obj = []
+        user = get_object_or_404(CustomUser, id=request.user.id)
+        user_courses_ids = user.courses.values_list('id', flat=True)
+        selection = get_object_or_404(Selection, pk=pk)
+        selection_skills_ids = selection.skills.values_list('id', flat=True)
 
-        # Проверяем какие курсы совпадают с подборкой
-        for skill in user_skills:
-            if skill in selection_skills:
-                user_skills_in_selection.append(skill)
-        courses = Course.objects.all()
+        # Предварительно загружаем навыки для каждого курса
+        courses_with_skills = Course.objects.prefetch_related(
+            Prefetch('skills', queryset=Skill.objects.filter(id__in=selection_skills_ids))
+        ).exclude(
+            id__in=user_courses_ids
+        )
 
-        # Удаляем курсы из списка которые пользователь уже прошел
-        for course in courses:
-            if course not in user_courses:
-                courses_for_recommend.append(course)
+        # Аннотируем количество совпадающих навыков
+        courses = courses_with_skills.annotate(
+            matching_skills_count=Count('skills', filter=Q(skills__id__in=selection_skills_ids))
+        ).filter(
+            matching_skills_count__gt=0
+        ).order_by('-matching_skills_count')
 
-        # Получаем список с количеством вхождений навыков пользователя в
-        # навыки курса
-        for course in courses_for_recommend:
-            counter = 0
-            for user_skill in user_skills_in_selection:
-                for course_skill in course.skills.all():
-                    if user_skill == course_skill:
-                        counter += 1
-                        if counter == len(user_skills_in_selection):
-                            break
-            skills_counters.append(counter)
+        # Если нет курсов с максимальным количеством совпадений, выбираем по хотя бы одному совпадению
+        if not courses:
+            courses = courses_with_skills.filter(
+                skills__id__in=selection_skills_ids
+            ).distinct()
 
-        # Получаем индексы чтобы взять по ним курсы для рекомендаций
-        for index in range(len(skills_counters)):
-            if skills_counters[index] != 0:
-                obj.append(courses_for_recommend[index])
-
-        # Если по максимальному количеству
-        # совпадений навыков пользователя и навыков подборки
-        # ничего не порекомендовать, то рекомендация только на
-        # основании скиллов в подборке по хотя бы одному совпадению
-        if len(obj) == 0:
-            for course in courses_for_recommend:
-                for skill in selection_skills:
-                    if skill in course.skills.all():
-                        obj.append(course)
-                        break
-
-        serializer = CourseSerializer(obj, many=True)
+        serializer = CourseSerializer(courses, many=True)
         return Response(serializer.data)
 
 
@@ -105,46 +81,23 @@ class SkillsView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        # Пытаемся понять есть ли у нас такой скилл в базовых,
-        # если нет то сохраняем is_custom_skill True
-        # потому что понимаем что скилл пользователь придумал сам
+        skill_name = request.data.get('name')
+        is_custom_skill = not Skill.objects.filter(name=skill_name, editable=False).exists()
 
-        is_custom_skill = True
-        not_editable_skills = Skill.objects.filter(editable=False)
-        for skill in not_editable_skills:
-            if request.data.get("name") == skill.name:
-                is_custom_skill = False
-                break
-
-        # Если скилл кастомный то нужно добавить его в общую таблицу
-        # и пометить editable True
-        if is_custom_skill:
-            # Конструкция позволяет пользователям думать что они создали
-            # свой навык и добавили его себе, на самом деле при совпадении
-            # по имени из БД возьмется существующий навык
-            # чтобы избежать дублирования одного и того же кастомного
-            # навыка разными пользователями
-            skill, editable = Skill.objects.get_or_create(
-                name=request.data.get("name"), editable=True
-            )
-
-        # Связываем навык и пользователя после добавления в базу
-        # либо из тех что в базе есть
-        user_skill = {
+        skill, created = Skill.objects.get_or_create(
+            name=skill_name, defaults={'editable': is_custom_skill}
+        )
+        user_skill_data = {
             "editable": is_custom_skill,
             "rate": 0,
             "notes": "",
         }
-        serializer = UserSkillSerializer(data=user_skill)
+        serializer = UserSkillSerializer(data=user_skill_data, context={'request': request})
         if serializer.is_valid():
-            try:
-                serializer.save(skill=skill, user=self.request.user)
-                return Response(
-                    serializer.data, status=status.HTTP_201_CREATED
-                )
-            except Exception:
-                return Response({"Этот навык уже имеется!"})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save(skill=skill, user=self.request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UpdateDeleteSkillsView(APIView):
