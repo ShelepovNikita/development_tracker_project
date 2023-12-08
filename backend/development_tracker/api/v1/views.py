@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -19,6 +20,8 @@ from users.models import CustomUser, UserSkill
 
 
 class RecommendedCoursesTrackerView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         """Возвращает рекомендованные курсы на основе хотя бы одного
         совпадения навыка пользователя с курсом, который он еще не проходил
@@ -40,6 +43,8 @@ class RecommendedCoursesTrackerView(APIView):
 
 
 class RecommendedCoursesCollectionView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         """Возвращает рекомендованные курсы по максимальному количеству
         совпадений навыков пользователя и навыков подборки."""
@@ -99,6 +104,8 @@ class RecommendedCoursesCollectionView(APIView):
 
 
 class SkillsView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         skills = Skill.objects.filter(editable=False)
         serializer = SkillSerializer(skills, many=True)
@@ -148,6 +155,8 @@ class SkillsView(APIView):
 
 
 class UpdateDeleteSkillsView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def patch(self, request, pk):
         user_skill = get_object_or_404(UserSkill, id=pk)
         if request.data.get("name") is not None:
@@ -184,6 +193,8 @@ class UpdateDeleteSkillsView(APIView):
 
 
 class UserDataView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user_skills = UserSkill.objects.filter(user=request.user)
         print(user_skills)
@@ -192,6 +203,7 @@ class UserDataView(APIView):
 
 
 class UserDataViewSet(ListViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = UserDataSkillSerializer
 
     def get_queryset(self):
@@ -199,5 +211,6 @@ class UserDataViewSet(ListViewSet):
 
 
 class CollectionsViewSet(ListViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = SelectionSerializer
     queryset = Selection.objects.all()
