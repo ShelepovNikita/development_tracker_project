@@ -20,7 +20,8 @@ class SkillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Skill
-        fields = ("name", "editable")
+        fields = ("id", "name", "editable")
+        read_only_fields = ("id",)
 
 
 class UserSkillSerializer(serializers.ModelSerializer):
