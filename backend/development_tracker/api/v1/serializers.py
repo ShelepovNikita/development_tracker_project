@@ -70,7 +70,7 @@ class PatchUserSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSkill
         fields = ("name", "rate", "notes", "editable")
-        read_only_fields = ("editable",)
+        read_only_fields = ("editable", "name")
 
 
 class UserDataSkillSerializer(serializers.ModelSerializer):

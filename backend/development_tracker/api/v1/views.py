@@ -1,4 +1,3 @@
-from django.db import IntegrityError
 from django.db.models import Prefetch, Count, Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -102,25 +101,28 @@ class SkillsView(APIView):
 
 class UpdateDeleteSkillsView(APIView):
     def patch(self, request, pk):
-        user_skill = get_object_or_404(UserSkill, id=pk)
-        if request.data.get("name") is not None:
-            name = request.data.pop("name")
-            skill = get_object_or_404(Skill, id=pk)
-            if skill.editable is True:
-                skill.name = name
-                skill.save()
+        user_skill = get_object_or_404(UserSkill.objects.select_related('skill'), id=pk)
+
+        # name = request.data.pop('name', None)
+        # if name is not None and user_skill.skill.editable is True:
+        #     user_skill.skill.name = name
+        #     user_skill.skill.save()
         serializer = PatchUserSkillSerializer(
-            user_skill, data=request.data, partial=True
+             user_skill, data=request.data, partial=True
         )
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
 
     def delete(self, request, pk):
-        user_skill = get_object_or_404(UserSkill, id=pk)
+        user_skill = get_object_or_404(UserSkill.objects.select_related('skill'), id=pk)
+        skill_name = user_skill.skill.name
+
+        # Удаление объекта без atomic.transaction()
         user_skill.delete()
+
         data = {
-            "name": Skill.objects.get(id=user_skill.skill_id).name,
+            "name": skill_name,
             "rate": user_skill.rate,
             "notes": user_skill.notes,
             "editable": user_skill.editable,
@@ -131,7 +133,6 @@ class UpdateDeleteSkillsView(APIView):
 class UserDataView(APIView):
     def get(self, request):
         user_skills = UserSkill.objects.filter(user=request.user)
-        print(user_skills)
         serializer = UserDataSkillSerializer(user_skills, many=True)
         return Response(serializer.data)
 
@@ -145,4 +146,4 @@ class UserDataViewSet(ListViewSet):
 
 class CollectionsViewSet(ListViewSet):
     serializer_class = SelectionSerializer
-    queryset = Selection.objects.all()
+    queryset = Selection.objects.prefetch_related('skills').all()

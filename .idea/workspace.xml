@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ebc40a1-4dc1-4d46-92e7-dbec202b683d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/development_tracker/api/v1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/api/v1/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/development_tracker/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/development_tracker/development_tracker/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/development_tracker/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/development_tracker/selections/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/selections/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/development_tracker/selections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/selections/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/development_tracker/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/development_tracker/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
