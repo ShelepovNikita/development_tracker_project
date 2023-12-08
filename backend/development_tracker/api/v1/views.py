@@ -1,3 +1,5 @@
+import random
+
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -101,6 +103,30 @@ class RecommendedCoursesCollectionView(APIView):
 
         serializer = CourseSerializer(obj, many=True)
         return Response(serializer.data)
+
+
+class RecommendedCoursesSkillView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        """Возвращает рекомендованные курсы на основе открытого наыка."""
+
+        skill = get_object_or_404(Skill, id=pk)
+        user_courses = request.user.courses.all()
+        courses = Course.objects.all()
+        user_courses = request.user.courses.all()
+        courses_for_recommend = []
+        obj = []
+        for course in courses:
+            if course not in user_courses:
+                courses_for_recommend.append(course)
+        for course in courses_for_recommend:
+            if skill in course.skills.all():
+                obj.append(course)
+        if len(obj) != 0:
+            serializer = CourseSerializer(random.choice(obj))
+            return Response(serializer.data)
+        return Response({})
 
 
 class SkillsView(APIView):
