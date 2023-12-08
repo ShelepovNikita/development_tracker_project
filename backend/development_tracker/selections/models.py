@@ -4,9 +4,9 @@ from skills.models import Skill
 
 class Selection(models.Model):
     name = models.CharField(max_length=100)
-    image = models.CharField(max_length=100)
-    imageHover = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
+    image = models.URLField()
+    imageHover = models.URLField()
+    description = models.TextField()
     skills = models.ManyToManyField(
         Skill,
         through="SelectionSkill",

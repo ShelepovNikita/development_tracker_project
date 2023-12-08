@@ -23,5 +23,5 @@ class UserSkill(models.Model):
         unique=True,
     )
     rate = models.IntegerField(default=0)
-    notes = models.CharField(max_length=100)
-    editable = models.BooleanField(default=True)
+    notes = models.CharField(max_length=255)
+    editable = models.BooleanField(default=False)

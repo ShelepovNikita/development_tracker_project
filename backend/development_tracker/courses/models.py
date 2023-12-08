@@ -5,15 +5,8 @@ from skills.models import Skill
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(
-        upload_to='courses/images/',
-        default=None,
-        validators=[
-            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'csv', ])
-        ],
-        verbose_name='Изображение'
-    )
-    url = models.CharField(max_length=255)
+    image = models.URLField()
+    url = models.URLField()
     skills = models.ManyToManyField(
         Skill,
         through="CourseDefaultSkill",
