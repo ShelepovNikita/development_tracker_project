@@ -108,12 +108,15 @@ class RecommendedCoursesCollectionView(APIView):
 class RecommendedCoursesSkillView(APIView):
     permission_classes = [IsAuthenticated]
 
-        def get(self, request, pk):
-        """Возвращает рекомендованные курсы на основе открытого наыка."""
+    def get(self, request, pk):
+        """Возвращает рекомендованные курсы на основе открытого навыка."""
+
         skill = get_object_or_404(Skill, id=pk)
         user_courses = request.user.courses.all()
 
-        courses = Course.objects.prefetch_related('skills').exclude(id__in=user_courses.values_list('id', flat=True))
+        courses = Course.objects.prefetch_related("skills").exclude(
+            id__in=user_courses.values_list("id", flat=True)
+        )
         courses_for_recommend = courses.filter(skills=skill)
 
         if courses_for_recommend.exists():
@@ -224,7 +227,7 @@ class UpdateDeleteSkillsView(APIView):
             "notes": user_skill.notes,
             "editable": user_skill.editable,
         }
-        return Response(data, status=status.HTTP_204_NO_CONTENT)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class UserDataView(APIView):
