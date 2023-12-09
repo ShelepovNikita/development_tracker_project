@@ -1,5 +1,6 @@
 from django.contrib import admin
-from selections.models import Selection
+
+from selections.models import Selection, SelectionSkill
 
 
 class SelectionAdmin(admin.ModelAdmin):
@@ -15,4 +16,16 @@ class SelectionAdmin(admin.ModelAdmin):
     )
 
 
+class SelectionSkillAdmin(admin.ModelAdmin):
+    list_display = (
+        "selection",
+        "skill",
+    )
+    search_fields = (
+        "selection",
+        "skill",
+    )
+
+
 admin.site.register(Selection, SelectionAdmin)
+admin.site.register(SelectionSkill, SelectionSkillAdmin)

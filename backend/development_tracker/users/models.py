@@ -16,6 +16,13 @@ class CustomUser(AbstractUser):
         Skill, through="UserSkill", through_fields=("user", "skill")
     )
 
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
+
 
 class UserSkill(models.Model):
     """Модель для связи пользователя и скилла.
@@ -42,3 +49,7 @@ class UserSkill(models.Model):
     )
     notes = models.CharField(max_length=100)
     editable = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Скиллы пользователя"
+        verbose_name_plural = "Скиллы пользователя"

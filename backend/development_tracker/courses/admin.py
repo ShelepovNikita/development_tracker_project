@@ -15,5 +15,13 @@ class CourseAdmin(admin.ModelAdmin):
     filter_horizontal = ("skills",)
 
 
+class CourseDefaultSkillAdmin(admin.ModelAdmin):
+    list_display = (
+        "course",
+        "skill",
+    )
+    search_fields = ("skill",)
+
+
 admin.site.register(Course, CourseAdmin)
-admin.site.register(CourseDefaultSkill)
+admin.site.register(CourseDefaultSkill, CourseDefaultSkillAdmin)
