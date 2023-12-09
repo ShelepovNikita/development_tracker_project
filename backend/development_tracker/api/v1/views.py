@@ -23,12 +23,13 @@ from users.models import CustomUser, UserSkill
 
 
 class RecommendedCoursesTrackerView(APIView):
+    """View for API response for url ...api/v1/recommended-courses-tracker/."""
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """Возвращает рекомендованные курсы на основе хотя бы одного
-        совпадения навыка пользователя с курсом, который он еще не проходил
-        для страницы Трекер."""
+        совпадения навыка пользователя с курсом, который он еще не проходил."""
         user = get_object_or_404(
             CustomUser.objects.prefetch_related("courses"), id=request.user.id
         )
@@ -57,6 +58,9 @@ class RecommendedCoursesTrackerView(APIView):
 
 
 class RecommendedCoursesCollectionView(APIView):
+    """View for API response
+    for url ...api/v1/recommended-courses-collection/<int:pk>/."""
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
@@ -99,10 +103,14 @@ class RecommendedCoursesCollectionView(APIView):
 
 
 class RecommendedCoursesSkillView(APIView):
+    """View for API response
+    for url ...api/v1/recommended-courses-skill/<int:pk>/."""
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
-        """Возвращает рекомендованные курсы на основе открытого навыка."""
+        """Возвращает рекомендованные курсы
+        на основе открытого навыка. РАНДОМНО."""
 
         skill = get_object_or_404(Skill, id=pk)
         user_courses = request.user.courses.all()
@@ -119,14 +127,20 @@ class RecommendedCoursesSkillView(APIView):
 
 
 class SkillsView(APIView):
+    """View for API response
+    for url ...api/v1/skills/."""
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        """Получение всех дефолтных скиллов, то есть поле editable=False."""
         skills = Skill.objects.filter(editable=False)
         serializer = SkillSerializer(skills, many=True)
         return Response(serializer.data)
 
     def post(self, request):
+        """Добавление скилла Если скилл дефолтный то просто берется его id,
+        если скилл кастомный то создается новый и берется ссылка на него."""
         skill_name = request.data.get("name")
         is_custom_skill = not Skill.objects.filter(
             name=skill_name, editable=False
@@ -153,9 +167,13 @@ class SkillsView(APIView):
 
 
 class UpdateDeleteSkillsView(APIView):
+    """View for API response
+    for url ...api/v1/skills/<int:pk>/."""
+
     permission_classes = [IsAuthenticated]
 
     def patch(self, request, pk):
+        """Изменение скилла пользователя, уровень оценки или заметка."""
         user_skill = get_object_or_404(
             UserSkill.objects.select_related("skill"), id=pk
         )
@@ -174,6 +192,7 @@ class UpdateDeleteSkillsView(APIView):
         return Response(user_skill)
 
     def delete(self, request, pk):
+        """Удаление скилла пользователя."""
         user_skill = get_object_or_404(
             UserSkill.objects.select_related("skill"), id=pk
         )
@@ -191,16 +210,10 @@ class UpdateDeleteSkillsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-class UserDataView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user_skills = UserSkill.objects.filter(user=request.user)
-        serializer = UserDataSkillSerializer(user_skills, many=True)
-        return Response(serializer.data)
-
-
 class UserDataViewSet(ListViewSet):
+    """View for API response
+    for url ...api/v1/userData/."""
+
     permission_classes = [IsAuthenticated]
     serializer_class = UserDataSkillSerializer
 
@@ -209,6 +222,9 @@ class UserDataViewSet(ListViewSet):
 
 
 class CollectionsViewSet(ListViewSet):
+    """View for API response
+    for url ...api/v1/collections/."""
+
     permission_classes = [IsAuthenticated]
     serializer_class = SelectionSerializer
     queryset = Selection.objects.prefetch_related("skills").all()
