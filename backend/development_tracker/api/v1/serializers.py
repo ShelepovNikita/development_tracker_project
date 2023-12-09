@@ -1,6 +1,3 @@
-import base64
-from django.core.files.base import ContentFile
-from django.conf import settings
 from rest_framework import serializers
 
 from courses.models import Course
@@ -34,23 +31,17 @@ class UserSkillSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         # Получаем имя навыка и пользователя из контекста запроса
-        skill_name = self.context['request'].data.get('name')
-        user = self.context['request'].user
+        skill_name = self.context["request"].data.get("name")
+        user = self.context["request"].user
 
-        # Проверяем, существует ли уже UserSkill для данного пользователя и навыка
-        if UserSkill.objects.filter(skill__name__iexact=skill_name.title(), user=user).exists():
-            raise serializers.ValidationError("Такой навык уже существует для данного пользователя.")
-
-        return data
-
-    def validate(self, data):
-        # Получаем имя навыка и пользователя из контекста запроса
-        skill_name = self.context['request'].data.get('name')
-        user = self.context['request'].user
-
-        # Проверяем, существует ли уже UserSkill для данного пользователя и навыка
-        if UserSkill.objects.filter(skill__name__iexact=skill_name.title(), user=user).exists():
-            raise serializers.ValidationError("Такой навык уже существует для данного пользователя.")
+        # Проверяем, существует ли уже UserSkill для
+        # данного пользователя и навыка
+        if UserSkill.objects.filter(
+            skill__name__iexact=skill_name.title(), user=user
+        ).exists():
+            raise serializers.ValidationError(
+                "Такой навык уже существует для данного пользователя."
+            )
 
         return data
 
@@ -82,9 +73,7 @@ class SkillSelectionSerializer(serializers.ModelSerializer):
 class SelectionSerializer(serializers.ModelSerializer):
     count = serializers.IntegerField(source="skills.count")
     skills = SkillSelectionSerializer(many=True, read_only=True)
-    image = Base64ImageField()
     # да простит меня Гвидо ван Россум за переменную imageHover
-    imageHover = Base64ImageField()
 
     class Meta:
         model = Selection

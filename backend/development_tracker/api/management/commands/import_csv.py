@@ -65,7 +65,9 @@ class Command(BaseCommand):
                 selection = Selection(
                     id=row.get("id"),
                     name=row.get("name"),
-                    description=row.get("name"),
+                    image=row.get("image"),
+                    imageHover=row.get("imageHover"),
+                    description=row.get("description"),
                 )
                 csv_data.append(selection)
             try:
