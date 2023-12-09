@@ -5,6 +5,7 @@ from api.v1.views import (
     CollectionsViewSet,
     RecommendedCoursesTrackerView,
     RecommendedCoursesCollectionView,
+    RecommendedCoursesSkillView,
     SkillsView,
     UpdateDeleteSkillsView,
     UserDataViewSet,
@@ -24,6 +25,11 @@ urlpatterns = [
     path(
         "recommended-courses-collection/<int:pk>/",
         RecommendedCoursesCollectionView.as_view(),
+        name="recommended_courses_collection",
+    ),
+    path(
+        "recommended-courses-skill/<int:pk>/",
+        RecommendedCoursesSkillView.as_view(),
         name="recommended_courses_collection",
     ),
     path(

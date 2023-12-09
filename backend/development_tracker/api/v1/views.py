@@ -1,5 +1,8 @@
 from django.db.models import Prefetch, Count, Q
+import random
+
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -20,6 +23,8 @@ from users.models import CustomUser, UserSkill
 
 
 class RecommendedCoursesTrackerView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         """Возвращает рекомендованные курсы на основе хотя бы одного
         совпадения навыка пользователя с курсом, который он еще не проходил
@@ -40,6 +45,8 @@ class RecommendedCoursesTrackerView(APIView):
 
 
 class RecommendedCoursesCollectionView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         """Возвращает рекомендованные курсы по максимальному количеству
         совпадений навыков пользователя и навыков подборки."""
@@ -73,7 +80,45 @@ class RecommendedCoursesCollectionView(APIView):
         return Response(serializer.data)
 
 
+class RecommendedCoursesSkillView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        """Возвращает рекомендованные курсы на основе открытого навыка."""
+
+        skill = get_object_or_404(Skill, id=pk)
+        user_courses = request.user.courses.all()
+
+        courses = Course.objects.prefetch_related("skills").exclude(
+            id__in=user_courses.values_list("id", flat=True)
+        )
+        courses_for_recommend = courses.filter(skills=skill)
+
+        if courses_for_recommend.exists():
+            serializer = CourseSerializer(random.choice(courses_for_recommend))
+            return Response(serializer.data)
+        return Response({})
+        # skill = get_object_or_404(Skill, id=pk)
+        # user_courses = request.user.courses.all()
+        # courses = Course.objects.all()
+        # user_courses = request.user.courses.all()
+        # courses_for_recommend = []
+        # obj = []
+        # for course in courses:
+        #     if course not in user_courses:
+        #         courses_for_recommend.append(course)
+        # for course in courses_for_recommend:
+        #     if skill in course.skills.all():
+        #         obj.append(course)
+        # if len(obj) != 0:
+        #     serializer = CourseSerializer(random.choice(obj))
+        #     return Response(serializer.data)
+        # return Response({})
+
+
 class SkillsView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         skills = Skill.objects.filter(editable=False)
         serializer = SkillSerializer(skills, many=True)
@@ -100,6 +145,8 @@ class SkillsView(APIView):
 
 
 class UpdateDeleteSkillsView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def patch(self, request, pk):
         user_skill = get_object_or_404(UserSkill.objects.select_related('skill'), id=pk)
 
@@ -112,7 +159,14 @@ class UpdateDeleteSkillsView(APIView):
         )
         if serializer.is_valid():
             serializer.save()
-        return Response(serializer.data)
+        user_skill = {
+            "id": user_skill.id,
+            "name": get_object_or_404(Skill, id=user_skill.skill_id).name,
+            "rate": user_skill.rate,
+            "notes": user_skill.notes,
+            "editable": user_skill.editable,
+        }
+        return Response(user_skill)
 
     def delete(self, request, pk):
         user_skill = get_object_or_404(UserSkill.objects.select_related('skill'), id=pk)
@@ -122,15 +176,18 @@ class UpdateDeleteSkillsView(APIView):
         user_skill.delete()
 
         data = {
-            "name": skill_name,
+            "id": pk,
+            "name": get_object_or_404(Skill, id=user_skill.skill_id).name,
             "rate": user_skill.rate,
             "notes": user_skill.notes,
             "editable": user_skill.editable,
         }
-        return Response(data, status=status.HTTP_204_NO_CONTENT)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class UserDataView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user_skills = UserSkill.objects.filter(user=request.user)
         serializer = UserDataSkillSerializer(user_skills, many=True)
@@ -138,6 +195,7 @@ class UserDataView(APIView):
 
 
 class UserDataViewSet(ListViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = UserDataSkillSerializer
 
     def get_queryset(self):
@@ -145,5 +203,6 @@ class UserDataViewSet(ListViewSet):
 
 
 class CollectionsViewSet(ListViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = SelectionSerializer
     queryset = Selection.objects.prefetch_related('skills').all()

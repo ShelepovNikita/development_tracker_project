@@ -1,9 +1,9 @@
 id,name,image,url
-1,Python-разработчик,,https://practicum.yandex.ru/backend-developer/
-2,Фронтенд-разработчик,,https://practicum.yandex.ru/frontend-developer/
-3,Аналитик данных,,https://practicum.yandex.ru/data-analyst/
-4,Графический дизайнер,,https://practicum.yandex.ru/graphic-designer/
-5,Веб-дизайнер,,https://practicum.yandex.ru/web-designer/
-6,Менеджер проектов,,https://practicum.yandex.ru/project-manager/
-7,IT-рекрутер,,https://practicum.yandex.ru/it-recruiter/
-8,Интернет-маркетолог,,https://practicum.yandex.ru/internet-marketing-start/
+1,Python-разработчик,http://127.0.0.1:8000/media/courses/images/python.png,https://practicum.yandex.ru/backend-developer/
+2,Фронтенд-разработчик,http://127.0.0.1:8000/media/courses/images/frontend.png,https://practicum.yandex.ru/frontend-developer/
+3,Аналитик данных,http://127.0.0.1:8000/media/courses/images/analitic.png,https://practicum.yandex.ru/data-analyst/
+4,Графический дизайнер,http://127.0.0.1:8000/media/courses/images/grafic_desiner.png,https://practicum.yandex.ru/graphic-designer/
+5,Веб-дизайнер,http://127.0.0.1:8000/media/courses/images/web_desiner.png,https://practicum.yandex.ru/web-designer/
+6,Менеджер проектов,http://127.0.0.1:8000/media/courses/images/manager_project.png,https://practicum.yandex.ru/project-manager/
+7,IT-рекрутер,http://127.0.0.1:8000/media/courses/images/it_recruter.png,https://practicum.yandex.ru/it-recruiter/
+8,Интернет-маркетолог,http://127.0.0.1:8000/media/courses/images/internet_marcetolog.png,https://practicum.yandex.ru/internet-marketing-start/

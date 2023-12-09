@@ -67,8 +67,26 @@ id,name,editable
 77,Tilda Publishing,false
 78,Яндекс Вебмастер,false
 79,Sendsay,false
-80,Google Docs, false
-81,SEO
-82,CRM
-83,SMM
-84,CJM
+80,Google Docs,false
+81,SEO,false
+82,CRM,false
+83,SMM,false
+84,CJM,false
+85,DevTools,false
+86,Charles,false
+87,Youtrack,false
+88,Android Studio,false
+89,Postman,false
+90,JSON/XML,false
+91,Анализ рынка,false
+92,Дизайн мышление,false
+93,Бюджетирование бренда,false
+94,Планирование ассортимента бренда,false
+95,Коммуникационная тратегия,false
+96,Архитектура бренда,false
+97,Модель SOSTAC для разработки стратегии бренда,false
+98,Платформа бренда: «Колесо бренда» и «Пирамида бренда»,false
+99,ABC-анализ для работы с портфелем,false
+100,Проведение глубинных интервью,false
+101,Разработка новых продуктов,false
+102,Продвижение в digital,false

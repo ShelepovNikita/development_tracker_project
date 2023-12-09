@@ -5,21 +5,9 @@ from skills.models import Skill
 
 class Selection(models.Model):
     name = models.CharField(max_length=100)
-    image = models.FileField(
-        upload_to='collections/images/',
-        validators=[
-            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'csv', 'svg', ])
-        ],
-        verbose_name='Изображение'
-    )
-    imageHover = models.FileField(
-        upload_to='collections/imageshover/',
-        validators=[
-            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'csv', 'svg', ])
-        ],
-        verbose_name='Ховер изображение'
-    )
-    description = models.CharField(max_length=255)
+    image = models.URLField()
+    imageHover = models.URLField()
+    description = models.TextField()
     skills = models.ManyToManyField(
         Skill,
         through="SelectionSkill",
