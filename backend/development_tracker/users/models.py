@@ -40,10 +40,10 @@ class UserSkill(models.Model):
         default=0,
         validators=[
             MinValueValidator(
-                limit_value=1, message="Минимальное значение - 1"
+                limit_value=0, message="Минимальное значение - 0"
             ),
             MaxValueValidator(
-                limit_value=5, message="Максимальное значение - 5"
+                limit_value=100, message="Максимальное значение - 100"
             ),
         ],
     )
