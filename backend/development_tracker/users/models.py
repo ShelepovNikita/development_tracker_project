@@ -7,6 +7,8 @@ from skills.models import Skill
 
 
 class CustomUser(AbstractUser):
+    """Кастомная модель пользователя для связи с курсами и скиллами."""
+
     courses = models.ManyToManyField(
         Course,
     )
@@ -16,6 +18,10 @@ class CustomUser(AbstractUser):
 
 
 class UserSkill(models.Model):
+    """Модель для связи пользователя и скилла.
+    Предполагается что после первого входа пользователь уже имеет скиллы
+    так как уже прошел хотя бы один курс Яндекс Практикума."""
+
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     skill = models.ForeignKey(
         Skill,
@@ -26,9 +32,13 @@ class UserSkill(models.Model):
     rate = models.IntegerField(
         default=0,
         validators=[
-            MinValueValidator(limit_value=1, message='Минимальное значение - 1'),
-            MaxValueValidator(limit_value=5, message='Максимальное значение - 5')
-        ]
+            MinValueValidator(
+                limit_value=1, message="Минимальное значение - 1"
+            ),
+            MaxValueValidator(
+                limit_value=5, message="Максимальное значение - 5"
+            ),
+        ],
     )
     notes = models.CharField(max_length=100)
     editable = models.BooleanField(default=True)

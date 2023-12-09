@@ -1,11 +1,18 @@
 from django.contrib import admin
-from .models import Selection
+from selections.models import Selection
 
 
 class SelectionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'imageHover',)  # Отображаемые поля в списке объектов Selection
-    search_fields = ('name', 'description', 'imageHover',)  # Поля для поиска в админ-панели
-    # Остальные настройки, если необходимо
+    list_display = (
+        "name",
+        "description",
+        "imageHover",
+    )
+    search_fields = (
+        "name",
+        "description",
+        "imageHover",
+    )
 
 
 admin.site.register(Selection, SelectionAdmin)

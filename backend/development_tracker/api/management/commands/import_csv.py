@@ -2,10 +2,11 @@ import csv
 
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
+
+from development_tracker.settings import BASE_DIR
 from courses.models import Course, CourseDefaultSkill
 from skills.models import Skill
 from selections.models import Selection, SelectionSkill
-from development_tracker.settings import BASE_DIR
 
 
 class Command(BaseCommand):
@@ -19,6 +20,7 @@ class Command(BaseCommand):
         self.selection_skill_upload()
 
     def courses_upload(self):
+        """Import from couses.csv."""
         with open(
             str(BASE_DIR) + "/data/" + "courses.csv", encoding="utf-8"
         ) as r_file:
@@ -36,9 +38,10 @@ class Command(BaseCommand):
                 Course.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {Course.__name__}")
             except IntegrityError:
-                print(f"Данные модели {Course.__name__} уже импортированы")
+                print(f"Данные модели {Course.__name__} импортированы")
 
     def skills_upload(self):
+        """Import from skills.csv."""
         with open(
             str(BASE_DIR) + "/data/" + "skills.csv", encoding="utf-8"
         ) as r_file:
@@ -53,9 +56,10 @@ class Command(BaseCommand):
                 Skill.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {Skill.__name__}")
             except IntegrityError:
-                print(f"Данные модели {Skill.__name__} уже импортированы")
+                print(f"Данные модели {Skill.__name__} импортированы")
 
     def selections_upload(self):
+        """Import from selections.csv."""
         with open(
             str(BASE_DIR) + "/data/" + "selections.csv", encoding="utf-8"
         ) as r_file:
@@ -74,9 +78,10 @@ class Command(BaseCommand):
                 Selection.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {Selection.__name__}")
             except IntegrityError:
-                print(f"Данные модели {Selection.__name__} уже импортированы")
+                print(f"Данные модели {Selection.__name__} импортированы")
 
     def course_skill_upload(self):
+        """Import from course_skill.csv."""
         with open(
             str(BASE_DIR) + "/data/" + "course_skill.csv", encoding="utf-8"
         ) as r_file:
@@ -96,10 +101,11 @@ class Command(BaseCommand):
                 )
             except IntegrityError:
                 print(
-                    f"Данные модели {CourseDefaultSkill.__name__} уже импортированы"
+                    f"Данные модели {CourseDefaultSkill.__name__}импортированы"
                 )
 
     def selection_skill_upload(self):
+        """Import from selection_skill.csv."""
         with open(
             str(BASE_DIR) + "/data/" + "selection_skill.csv", encoding="utf-8"
         ) as r_file:
@@ -116,6 +122,4 @@ class Command(BaseCommand):
                 SelectionSkill.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {SelectionSkill.__name__}")
             except IntegrityError:
-                print(
-                    f"Данные модели {SelectionSkill.__name__} уже импортированы"
-                )
+                print(f"Данные модели {SelectionSkill.__name__} импортированы")

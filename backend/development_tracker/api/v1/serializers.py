@@ -7,12 +7,16 @@ from selections.models import Selection
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    """Сериализация полей модели Курсов."""
+
     class Meta:
         model = Course
         fields = ("name", "image", "url")
 
 
 class SkillSerializer(serializers.ModelSerializer):
+    """Сериализация полей модели Скиллов."""
+
     editable = serializers.HiddenField(default=False)
 
     class Meta:
@@ -22,6 +26,9 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class UserSkillSerializer(serializers.ModelSerializer):
+    """Сериализация полей модели пользовательских скиллов
+    для добавления скилла."""
+
     name = serializers.StringRelatedField(read_only=True, source="skill")
 
     class Meta:
@@ -47,6 +54,9 @@ class UserSkillSerializer(serializers.ModelSerializer):
 
 
 class PatchUserSkillSerializer(serializers.ModelSerializer):
+    """Сериализация полей модели пользовательских скиллов
+    для обновления."""
+
     name = serializers.StringRelatedField(source="skill")
 
     class Meta:
@@ -56,6 +66,9 @@ class PatchUserSkillSerializer(serializers.ModelSerializer):
 
 
 class UserDataSkillSerializer(serializers.ModelSerializer):
+    """Сериализация полей модели пользовательских скиллов
+    для получения информции о пользователе."""
+
     name = serializers.StringRelatedField(source="skill")
 
     class Meta:
@@ -65,12 +78,17 @@ class UserDataSkillSerializer(serializers.ModelSerializer):
 
 
 class SkillSelectionSerializer(serializers.ModelSerializer):
+    """Для сериализации скиллов по запросу о подборках."""
+
     class Meta:
         model = Skill
         fields = ("name",)
 
 
 class SelectionSerializer(serializers.ModelSerializer):
+    """Сериализация полей модели подборок
+    для получения информции о них."""
+
     count = serializers.IntegerField(source="skills.count")
     skills = SkillSelectionSerializer(many=True, read_only=True)
     # да простит меня Гвидо ван Россум за переменную imageHover
