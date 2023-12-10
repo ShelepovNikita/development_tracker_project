@@ -4,10 +4,11 @@ services:
 
   db:
     image: postgres:15
+    container_name: development_tracker_db
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data/
+      - development_tracker_volume:/var/lib/postgresql/data/
     env_file:
       - .env
     restart: always
@@ -16,6 +17,7 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
+    container_name: development_tracker_backend
     depends_on:
       - db
     env_file:
@@ -26,4 +28,4 @@ services:
 
 
 volumes:
-  db_data:
+  development_tracker_volume:
