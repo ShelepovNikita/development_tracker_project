@@ -73,7 +73,14 @@ class UserDataSkillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSkill
-        fields = ("id", "name", "rate", "notes", "editable")
+        fields = (
+            "id",
+            "skill",
+            "name",
+            "rate",
+            "notes",
+            "editable",
+        )
         read_only_fields = ("editable",)
 
 
