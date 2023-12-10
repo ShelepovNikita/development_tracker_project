@@ -18,5 +18,11 @@ RUN pip install -r requirements.txt --no-cache-dir
 # в текущую рабочую директорию образа — /development_tracker_app.
 COPY development_tracker/ .
 
+# Копирование entrypoint.sh в контейнер
+COPY entrypoint.sh /
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 # При старте контейнера запустить сервер разработки.
-CMD ["python", "manage.py", "runserver", "0:8000"]
+#CMD ["python", "manage.py", "runserver", "0:8000"]
