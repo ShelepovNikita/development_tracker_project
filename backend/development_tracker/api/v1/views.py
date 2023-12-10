@@ -168,7 +168,6 @@ class SkillsView(APIView):
         serializer = UserSkillSerializer(
             data=user_skill_data, context={"request": request}
         )
-        print(skill)
         if serializer.is_valid():
             serializer.save(skill=skill, user=self.request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -185,10 +184,11 @@ class UpdateDeleteSkillsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def patch(self, request, pk):
+        """Изменение скилла пользователя, уровня оценки или заметки."""
 
-        """Изменение скилла пользователя, уровень оценки или заметка."""
-
-        user_skill = get_object_or_404(UserSkill.objects.select_related('skill'), id=pk)
+        user_skill = get_object_or_404(
+            UserSkill.objects.select_related("skill"), id=pk
+        )
 
         name = request.data.pop("name", None)
         if name is not None and user_skill.skill.editable is True:
