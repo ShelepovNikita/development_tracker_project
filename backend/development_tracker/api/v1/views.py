@@ -185,7 +185,7 @@ class UpdateDeleteSkillsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def patch(self, request, pk):
-<<<<<<< HEAD
+
         """Изменение скилла пользователя, уровень оценки или заметка."""
 
         user_skill = get_object_or_404(UserSkill.objects.select_related('skill'), id=pk)
@@ -194,7 +194,6 @@ class UpdateDeleteSkillsView(APIView):
         if name is not None and user_skill.skill.editable is True:
             user_skill.skill.name = name
             user_skill.skill.save()
-
 
         serializer = PatchUserSkillSerializer(
             user_skill, data=request.data, partial=True
@@ -213,7 +212,6 @@ class UpdateDeleteSkillsView(APIView):
             skill_to_delete = user_skill.skill
             user_skill.delete()
             skill_to_delete.delete()
-
 
         data = {
             "id": pk,
