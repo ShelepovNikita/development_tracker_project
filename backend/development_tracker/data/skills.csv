@@ -13,80 +13,80 @@ id,name,editable
 12,CSS,false
 13,Flexbox,false
 14,Git,false
-16,JavaScript,false
-17,TypeScript,false
-18,React,false
-19,Redux,false
-20,Grid Layout,false
-21,DOM,false
-22,Webpack,false
-23,React Router,false
-24,ООП,false
-26,Jupyter Notebook,false
-29,Talebau,false
-30,A/B-тесты,false
-31,Figma,false
-32,Adobe Illustrator,false
-33,Adobe Photoshop,false
-34,Вёрстка,false
-35,Брендбук,false
-36,Анализ Аудиторий,false
-37,Поиск идей,false
-38,Презентации,false
-39,Типографика,false
-40,Мерч,false
-43,Tilda,false
-46,Типографика,false
-47,Композиция,false
-48,Генерация идей,false
-49,GranttPRO,false
-50,Miro,false
-52,Kaiten,false
-53,Google Sheets,false
-54,Kanban,false
-55,Waterfall,false
-56,Agile,false
-57,Scrum,false
-58,Пачка,false
-59,Портрет кандидата,false
-60,Boolean search,false
-61,HH; Хабр Карьера,false
-62,Поиск в соцсетях,false
-63,Sourcing Extensions,false
-64,Воронка подбора,false
-65,X-Ray-Поиск,false
-66,Хантфлоу,false
-68,Notion,false
-69,Карта поиска,false
-71,Яндекс Директ,false
-72,Wordstat,false
-73,Яндекс Метрика,false
-74,Google Analytics,false
-75,VK Реклама,false
-76,Telegram Ads,false
-77,Tilda Publishing,false
-78,Яндекс Вебмастер,false
-79,Sendsay,false
-80,Google Docs,false
-81,SEO,false
-82,CRM,false
-83,SMM,false
-84,CJM,false
-85,DevTools,false
-86,Charles,false
-87,Youtrack,false
-88,Android Studio,false
-89,Postman,false
-90,JSON/XML,false
-91,Анализ рынка,false
-92,Дизайн мышление,false
-93,Бюджетирование бренда,false
-94,Планирование ассортимента бренда,false
-95,Коммуникационная тратегия,false
-96,Архитектура бренда,false
-97,Модель SOSTAC для разработки стратегии бренда,false
-98,Платформа бренда: «Колесо бренда» и «Пирамида бренда»,false
-99,ABC-анализ для работы с портфелем,false
-100,Проведение глубинных интервью,false
-101,Разработка новых продуктов,false
-102,Продвижение в digital,false
+15,JavaScript,false
+16,TypeScript,false
+17,React,false
+18,Redux,false
+19,Grid Layout,false
+20,DOM,false
+21,Webpack,false
+22,React Router,false
+23,ООП,false
+24,Jupyter Notebook,false
+25,Talebau,false
+26,A/B-тесты,false
+27,Figma,false
+28,Adobe Illustrator,false
+29,Adobe Photoshop,false
+30,Вёрстка,false
+31,Брендбук,false
+32,Анализ Аудиторий,false
+33,Поиск идей,false
+34,Презентации,false
+35,Типографика,false
+36,Мерч,false
+37,Tilda,false
+38,Типографика,false
+39,Композиция,false
+40,Генерация идей,false
+41,GranttPRO,false
+42,Miro,false
+43,Kaiten,false
+44,Google Sheets,false
+45,Kanban,false
+46,Waterfall,false
+47,Agile,false
+48,Scrum,false
+49,Пачка,false
+50,Портрет кандидата,false
+51,Boolean search,false
+52,HH; Хабр Карьера,false
+53,Поиск в соцсетях,false
+54,Sourcing Extensions,false
+55,Воронка подбора,false
+56,X-Ray-Поиск,false
+57,Хантфлоу,false
+58,Notion,false
+59,Карта поиска,false
+60,Яндекс Директ,false
+61,Wordstat,false
+62,Яндекс Метрика,false
+63,Google Analytics,false
+64,VK Реклама,false
+65,Telegram Ads,false
+66,Tilda Publishing,false
+67,Яндекс Вебмастер,false
+68,Sendsay,false
+69,Google Docs,false
+70,SEO,false
+71,CRM,false
+72,SMM,false
+73,CJM,false
+74,DevTools,false
+75,Charles,false
+76,Youtrack,false
+77,Android Studio,false
+78,Postman,false
+79,JSON/XML,false
+80,Анализ рынка,false
+81,Дизайн мышление,false
+82,Бюджетирование бренда,false
+83,Планирование ассортимента бренда,false
+84,Коммуникационная тратегия,false
+85,Архитектура бренда,false
+86,Модель SOSTAC для разработки стратегии бренда,false
+87,Платформа бренда: «Колесо бренда» и «Пирамида бренда»,false
+88,ABC-анализ для работы с портфелем,false
+89,Проведение глубинных интервью,false
+90,Разработка новых продуктов,false
+91,Продвижение в digital,false

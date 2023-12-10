@@ -26,9 +26,13 @@ class Command(BaseCommand):
         ) as r_file:
             reader = csv.DictReader(r_file)
             csv_data = []
+            if len(Course.objects.all()) != 0:
+                print(f"Данные модели {Course.__name__} уже импортированы!")
+                return
+
             for row in reader:
                 course = Course(
-                    id=row.get("id"),
+                    # id=row.get("id"),
                     name=row.get("name"),
                     image=row.get("image"),
                     url=row.get("url"),
@@ -38,7 +42,7 @@ class Command(BaseCommand):
                 Course.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {Course.__name__}")
             except IntegrityError:
-                print(f"Данные модели {Course.__name__} импортированы")
+                print(f"Данные модели {Course.__name__} уже импортированы!")
 
     def skills_upload(self):
         """Import from skills.csv."""
@@ -47,16 +51,22 @@ class Command(BaseCommand):
         ) as r_file:
             reader = csv.DictReader(r_file)
             csv_data = []
+            if len(Skill.objects.all()) != 0:
+                print(f"Данные модели {Skill.__name__} уже импортированы!")
+                return
+
             for row in reader:
                 skill = Skill(
-                    id=row.get("id"), name=row.get("name"), editable=False
+                    # id=row.get("id"),
+                    name=row.get("name"),
+                    editable=False,
                 )
                 csv_data.append(skill)
             try:
                 Skill.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {Skill.__name__}")
             except IntegrityError:
-                print(f"Данные модели {Skill.__name__} импортированы")
+                print(f"Данные модели {Skill.__name__} импортированы!")
 
     def selections_upload(self):
         """Import from selections.csv."""
@@ -65,20 +75,24 @@ class Command(BaseCommand):
         ) as r_file:
             reader = csv.DictReader(r_file)
             csv_data = []
+            if len(Selection.objects.all()) != 0:
+                print(f"Данные модели {Selection.__name__} уже импортированы!")
+                return
             for row in reader:
                 selection = Selection(
-                    id=row.get("id"),
+                    # id=row.get("id"),
                     name=row.get("name"),
                     image=row.get("image"),
                     imageHover=row.get("imageHover"),
                     description=row.get("description"),
                 )
                 csv_data.append(selection)
+
             try:
                 Selection.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {Selection.__name__}")
             except IntegrityError:
-                print(f"Данные модели {Selection.__name__} импортированы")
+                print(f"Данные модели {Selection.__name__} уже импортированы!")
 
     def course_skill_upload(self):
         """Import from course_skill.csv."""
@@ -87,13 +101,20 @@ class Command(BaseCommand):
         ) as r_file:
             reader = csv.DictReader(r_file)
             csv_data = []
+            if len(CourseDefaultSkill.objects.all()) != 0:
+                print(
+                    f"Данные модели {CourseDefaultSkill.__name__}"
+                    " уже импортированы!"
+                )
+                return
             for row in reader:
                 course_skill = CourseDefaultSkill(
-                    id=row.get("id"),
+                    # id=row.get("id"),
                     course=Course(id=row.get("course")),
                     skill=Skill(id=row.get("skill")),
                 )
                 csv_data.append(course_skill)
+
             try:
                 CourseDefaultSkill.objects.bulk_create(csv_data)
                 print(
@@ -101,7 +122,8 @@ class Command(BaseCommand):
                 )
             except IntegrityError:
                 print(
-                    f"Данные модели {CourseDefaultSkill.__name__}импортированы"
+                    f"Данные модели {CourseDefaultSkill.__name__}"
+                    " уже импортированы!"
                 )
 
     def selection_skill_upload(self):
@@ -111,9 +133,14 @@ class Command(BaseCommand):
         ) as r_file:
             reader = csv.DictReader(r_file)
             csv_data = []
+            if len(SelectionSkill.objects.all()) != 0:
+                print(
+                    f"Данные модели {SelectionSkill.__name__}"
+                    " уже импортированы!"
+                )
+                return
             for row in reader:
                 selection_skill = SelectionSkill(
-                    id=row.get("id"),
                     selection=Selection(id=row.get("selection")),
                     skill=Skill(id=row.get("skill")),
                 )
@@ -122,4 +149,7 @@ class Command(BaseCommand):
                 SelectionSkill.objects.bulk_create(csv_data)
                 print(f"Добавлены записи в таблицу {SelectionSkill.__name__}")
             except IntegrityError:
-                print(f"Данные модели {SelectionSkill.__name__} импортированы")
+                print(
+                    f"Данные модели {SelectionSkill.__name__}"
+                    " уже импортированы!"
+                )

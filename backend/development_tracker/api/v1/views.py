@@ -113,6 +113,8 @@ class RecommendedCoursesSkillView(APIView):
         на основе открытого навыка. РАНДОМНО."""
 
         skill = get_object_or_404(Skill, id=pk)
+        if skill.editable:
+            return Response({})
         user_courses = request.user.courses.all()
 
         courses = Course.objects.prefetch_related("skills").exclude(
@@ -146,9 +148,17 @@ class SkillsView(APIView):
             name=skill_name, editable=False
         ).exists()
 
-        skill, created = Skill.objects.get_or_create(
-            name=skill_name, defaults={"editable": is_custom_skill}
-        )
+        if is_custom_skill:
+            if request.user.user_skills.filter(name=skill_name):
+                return Response(
+                    {"Навык уже есть"}, status=status.HTTP_400_BAD_REQUEST
+                )
+            skill = Skill.objects.create(
+                name=skill_name, editable=is_custom_skill
+            )
+        else:
+            skill = get_object_or_404(Skill, name=skill_name)
+
         user_skill_data = {
             "editable": is_custom_skill,
             "rate": 0,
@@ -157,6 +167,7 @@ class SkillsView(APIView):
         serializer = UserSkillSerializer(
             data=user_skill_data, context={"request": request}
         )
+        print(skill)
         if serializer.is_valid():
             serializer.save(skill=skill, user=self.request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -173,7 +184,7 @@ class UpdateDeleteSkillsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def patch(self, request, pk):
-        """Изменение скилла пользователя, уровень оценки или заметка."""
+        """Изменение скилла пользователя, уровеня оценки или заметки."""
         user_skill = get_object_or_404(
             UserSkill.objects.select_related("skill"), id=pk
         )
