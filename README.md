@@ -51,10 +51,6 @@ Cоздать в папке infra .env файл с переменными окр
 
     docker exec -it development_tracker_backend python manage.py import_csv --path <путь к csv-файлу> --model_name <имя модели> --app_name <название приложения>
 
-Например, для импорта данных о пользователях из файла 'users.csv' команда будет следующей:
-
-    docker exec -it development_tracker_backend python manage.py import_csv --path static/data/users.csv --model_name user --app_name users
-
 Данные из файлов необходимо загружать в следующем порядке:
 
 * courses.csv
