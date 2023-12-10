@@ -94,4 +94,4 @@ Cоздать в папке infra .env файл с переменными окр
 
 [ShelepovNikita](https://github.com/ShelepovNikita) - Шелепов Никита
 
-[terrazavr](https://github.com/Lexxar91) - Муратов Дмитрий
+[Lexxar91](https://github.com/Lexxar91) - Муратов Дмитрий
