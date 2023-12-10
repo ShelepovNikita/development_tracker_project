@@ -1,24 +1,101 @@
-# development_tracker_project
-Hackathon+ development tracker from Yandex
+# Проект Трекер развития
+## Описание проекта
 
-## Docker develop mode
+Платформа "Трекер развития" позволяет пользователю (студенту или выпускнику Яндекс Практикума) отслеживать свой личный прогресс и изучении навыков, а так же получать рекомендации на основе них. При первом подключении пользователь либо уже имеет набор навыков, в случае если это выпускник, либо имеет возможность добавлять навыки самостоятельно.
+
+
+## Технологии использованные в проекте:
+* Python 3.10
+* Django 4.2.7
+* DRF 3.14.0
+* Docker
+* БД PostgreSQL
+* REST API
+
+## Как запустить проект:
+
 Клонировать репозиторий и перейти в него в командной строке:
 
-    html git clone git@github.com:ShelepovNikita/development_tracker_project.git
+    git clone git@github.com:ShelepovNikita/development_tracker_project.git
     cd development_tracker_project
 
-Перейти в папку backend:
 
-    cd backend
+Cоздать в папке infra .env файл с переменными окружения.
+Используемые переменные окружения (с примерами):
 
-Создать образ бэкэнда:
+    DB_HOST=DB_HOST
+    DB_ENGINE=django.db.backends.postgresql
+    DB_NAME=DB_NAME
+    POSTGRES_USER=POSTGRES_USER
+    POSTGRES_USER=POSTGRES_USER
+    POSTGRES_PASSWORD=POSTGRES_PASSWORD
+    DB_PORT=DB_PORT
 
-    sudo docker build -t development_tracker_backend .
+Запустить проект с помощью Docker:
 
-Запустить контейнер из образа:
+    docker compose up
 
-    sudo docker run --name development_tracker_backend_container --rm -p 8000:8000 development_tracker_backend
+Документация проекта доступна по адресам:
 
-Доступ к документации по адресу
+    http://127.0.0.1:8000/redoc/
+    http://127.0.0.1:8000/swagger/
 
-    http://localhost:8000/swagger/
+
+## Как импортировать данные из csv-файлов в базу данных
+
+С помощью management-команд. Для того, чтобы загрузить все данные, из корневой директории проекта выполните команду:
+
+    docker exec -it development_tracker_backend python manage.py import_csv
+
+Чтобы загрузить данные из определённого файла для конкретной модели, выполните команду:
+
+    docker exec -it development_tracker_backend python manage.py import_csv --path <путь к csv-файлу> --model_name <имя модели> --app_name <название приложения>
+
+Например, для импорта данных о пользователях из файла 'users.csv' команда будет следующей:
+
+    docker exec -it development_tracker_backend python manage.py import_csv --path static/data/users.csv --model_name user --app_name users
+
+Данные из файлов необходимо загружать в следующем порядке:
+
+* courses.csv
+* skills.csv
+* selections.csv
+* course_skill.csv
+* selection_skill.csv
+
+## Авторизация:
+
+Авторизация по токену. Необходимо создать пользователя через админ панель и сделать ему токен. Все запросы передавать вместе с токеном в headers (authorization: "Token ...")
+Авторизация не входила в MVP, предполагается интеграция с сервисами Яндекса.
+
+## Примеры запросов к API:
+
+Получение списка всех скиллов (GET):
+
+    http://localhost:8000/api/v1/skills/
+
+Добавление навыка пользователю (POST):
+
+    http://localhost:8000/api/v1/skills/
+
+Получение списка скиллов пользователя(GET):
+
+    http://localhost:8000/api/v1/userData/
+
+Получение списка рекомендаций курсов на основе скиллов пользователя(GET):
+
+    http://localhost:8000/api/v1/recommended-courses-tracker/
+
+Получение списка рекомендаций курсов на основе открытого скилла (режим редактирования)(GET):
+
+    http://localhost:8000/api/v1/recommended-courses-skill/int:pk/
+
+
+**Проект написан в рамках Хакатон+, разработка MVP сервиса Трекер Развития.**
+
+
+## Над проектом работали
+
+[ShelepovNikita](https://github.com/ShelepovNikita) - Шелепов Никита
+
+[terrazavr](https://github.com/Lexxar91) - Муратов Дмитрий
