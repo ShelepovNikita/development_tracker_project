@@ -71,7 +71,6 @@ REST_FRAMEWORK = {
 }
 
 WSGI_APPLICATION = "development_tracker.wsgi.application"
-
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",

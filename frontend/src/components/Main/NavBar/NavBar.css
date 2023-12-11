@@ -1,0 +1,141 @@
+.navBar {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  width: 160px;
+  color: #b5b5b7;
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  font-family: YS Text;
+}
+
+.navBar__container {
+  height: 86px;
+  width: 144px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  margin-bottom: 26px;
+}
+
+.navBar__profile {
+  display: flex;
+  align-items: center;
+}
+
+.navBar__avatar {
+  padding: 12px 4px 10px 8px;
+  width: 24px;
+  height: 24px;
+}
+
+.navBar__name {
+  margin: 0;
+  color: #000;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 12px;
+  cursor: pointer;
+}
+
+.navBar__name_type_margin {
+  margin-left: 8px;
+}
+
+.navBar__profile-acseleration {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navBar__acsseleration {
+  margin: 4px 0 0;
+  color: #5a9bff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 12px;
+  cursor: pointer;
+}
+
+.navBar__acsseleration_type_margin {
+  margin-left: 8px;
+}
+
+.navBar__arrow {
+  width: 16px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.navBar__container-menu {
+  display: flex;
+}
+
+.navBar__container-menu_type_line {
+  border-bottom: #fff solid 1px;
+  border-top: #fff solid 1px;
+}
+
+.navBar__container-menu_type_margin {
+  margin: 24px 0;
+}
+
+.navBar__container-menu_type_padding {
+  padding: 24px 0;
+}
+
+.navBar__icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.navBar__link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 0 19px;
+  cursor: pointer;
+}
+
+.navBar__link_type_bottom {
+  margin-bottom: 0;
+}
+
+.navBar__link_type_center {
+  text-align: center;
+}
+
+.navBar__button {
+  height: 36px;
+  width: 145px;
+  background-color: #fff;
+  border-radius: 6px;
+  margin-top: 251px;
+  margin-bottom: 35px;
+  color: #1d6bf3;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 8px 23px;
+  border: 1px solid #1d6bf3;
+  cursor: pointer;
+}
+
+.navBar__container-exit {
+  margin-bottom: 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #1a1b22;
+  cursor: pointer;
+  border: none;
+  color: #b5b5b7;
+}
+
+.navBar__exit {
+  margin: 0 5px 0 0;
+}

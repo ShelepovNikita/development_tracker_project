@@ -1,0 +1,25 @@
+.recommendations {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.recommendations__title {
+    padding: 0;
+    margin: 0 0 16px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+
+.recommendations-text {
+    font-family: 'YS Text';
+    margin: 0;
+    padding: 0;
+    width: 249px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #797981;
+}
+  

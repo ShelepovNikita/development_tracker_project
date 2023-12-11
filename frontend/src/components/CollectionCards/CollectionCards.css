@@ -1,0 +1,68 @@
+.collection-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 210px);
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.collection-cards__link {
+  text-decoration: none;
+  color: #1a1b22;
+}
+
+.collection-cards__wpapper {
+  padding: 20px;
+  border: 1px solid rgba(249, 250, 251, 1);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 20px rgba(121, 121, 129, 0.15);
+  cursor: pointer;
+}
+
+.collection-cards__wpapper:hover {
+  transition: .4s;
+  transform: scale(1.2);
+}
+
+.collection-cards__title {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  margin: 0 0 28px;
+  padding: 0;
+  text-align: center;
+  min-height: 40px;
+}
+
+.collection-cards__image {
+  width: 117px;
+  height: 117px;
+  display: flex;
+  margin: 0 auto 20px;
+  cursor: pointer;
+}
+
+.collection-cards__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection-cards__tag {
+  margin: 0;
+  background-color: rgba(249, 250, 251, 1);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.collection-cards__details-else {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #5a9bff;
+  margin: 0;
+}
+
+.collection-cards__details-else:hover {
+  text-decoration: underline;
+}

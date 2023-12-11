@@ -1,0 +1,44 @@
+.skill-editor__rate-button {
+  position: relative;
+  border: none;
+  outline: none;
+  width: 70px;
+  height: 24px;
+  border-radius: 24px;
+  background-color: #dde0e4;
+  cursor: pointer;
+}
+
+.button-one:hover {
+  background-color: #c2e5ce;
+}
+
+.skill-editor__type-green {
+  background-color: #c2e5ce;
+}
+
+.skill-editor__rate-button:hover .tooltip {
+  display: block;
+}
+
+.skill-editor__rate-button.selected {
+  background-color: #87cc9e;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: 150%; /*отступ */
+  left: 0; /* Выравнивание по левому краю кнопки */
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(121, 121, 129, 0.15);
+  z-index: 999;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: start;
+  width: fit-content;
+  white-space: nowrap;
+}

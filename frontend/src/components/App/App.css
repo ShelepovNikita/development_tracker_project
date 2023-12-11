@@ -1,0 +1,17 @@
+.page {
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  min-width: 320px;
+  max-width: 1440px;
+  box-sizing: border-box;
+  font-family: 'YS', 'Arial', sans-serif;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  position: relative;
+}

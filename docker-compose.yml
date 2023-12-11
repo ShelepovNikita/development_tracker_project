@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:15
+    container_name: development_tracker_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - development_tracker_volume:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    restart: always
+
+  frontend:
+    image: lexxar91/frontend:latest
+    volumes:
+      - static:/frontend_static
+
+  backend:
+    image: lexxar91/foodgram_backend:latest    #container_name: development_tracker_backend
+    depends_on:
+      - db
+    env_file:
+     - .env
+    restart: always
+    volumes:
+      - static:/backend_static
+    ports:
+     - "8000:8000"
+
+  gateway:
+    build: lexxar91/taski_gateway:latest
+    # А тут подключаем volume со статикой к gateway
+    volumes:
+      - static:/staticfiles/
+    ports:
+      - 8000:80
+
+volumes:
+  static:
+  development_tracker_volume:
