@@ -204,14 +204,13 @@ class UpdateDeleteSkillsView(APIView):
 
     def delete(self, request, pk):
         """Удаление скилла пользователя."""
-        user_skill = get_object_or_404(
-            UserSkill.objects.select_related("skill"), id=pk
-        )
+        user_skill = get_object_or_404(UserSkill, id=pk)
 
         with transaction.atomic():
-            skill_to_delete = user_skill.skill
             user_skill.delete()
-            skill_to_delete.delete()
+            if user_skill.editable is True:
+                skill_to_delete = user_skill.skill
+                skill_to_delete.delete()
 
         data = {
             "id": pk,
